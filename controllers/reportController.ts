@@ -124,6 +124,9 @@ export const exportUsersReport = async (req: Request, res: Response): Promise<vo
       'attachment; filename="users_report.xlsx"'
     );
 
+    await workbook.xlsx.write(res as unknown as Writable);
+    res.end();
+
   } catch (error: unknown) {
     if (error instanceof Error) {
       res.status(500).json({ message: "Server Error", error: error.message });
